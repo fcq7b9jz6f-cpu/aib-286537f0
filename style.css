@@ -1,0 +1,63 @@
+:root {
+  --brand: 217 91% 60%;
+  --bg-default: 222 47% 11%;
+  --bg-subtle: 222 47% 15%;
+  --bg-inset: 222 47% 9%;
+  --text-default: 220 14% 90%;
+  --text-muted: 220 10% 60%;
+  --text-inverse: 220 100% 10%;
+  --border: 222 47% 20%;
+}
+
+body {
+  font-family: 'Tajawal', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--bg-subtle));
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--border));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--text-muted));
+}
+
+.prose pre {
+    background-color: hsl(var(--bg-inset));
+    border: 1px solid hsl(var(--border));
+    border-radius: 0.5rem;
+    padding: 1rem;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    direction: ltr;
+    text-align: left;
+}
+
+.prose code {
+    background-color: hsl(var(--bg-inset));
+    padding: 0.2em 0.4em;
+    margin: 0;
+    font-size: 85%;
+    border-radius: 6px;
+    direction: ltr;
+    text-align: left;
+}
+
+.prose pre code {
+    background-color: transparent;
+    padding: 0;
+    margin: 0;
+    font-size: inherit;
+    border-radius: 0;
+}
