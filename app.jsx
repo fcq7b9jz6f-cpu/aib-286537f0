@@ -31,12 +31,22 @@ const useLocalStorage = (key, initialValue) => {
 
 function SimpleMarkdown({ content }) {
     const formattedContent = useMemo(() => {
-        let html = content
-            .replace(/\*\*([^\*]+)\*\*/g, '<strong>$1</strong>')
-            .replace(/\*([^\*]+)\*/g, '<em>$1</em>')
-            .replace(/```(.*?)```/gs, '<pre><code>$1</code></pre>')
-            .replace(/`([^`]+)`/g, '<code>$1</code>')
-            .replace(/\n/g, '<br />');
+        if (!content) return { __html: '' };
+
+        const parts = content.split(/(```[\s\S]*?```)/g);
+        const html = parts.map(part => {
+            if (part.startsWith('```') && part.endsWith('```')) {
+                const code = part.slice(3, -3);
+                const escapedCode = code.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+                return `<pre><code>${escapedCode}</code></pre>`;
+            }
+            return part
+                .replace(/\*\*([^\*]+)\*\*/g, '<strong>$1</strong>')
+                .replace(/\*([^\*]+)\*/g, '<em>$1</em>')
+                .replace(/`([^`]+)`/g, '<code>$1</code>')
+                .replace(/\n/g, '<br />');
+        }).join('');
+
         return { __html: html };
     }, [content]);
 
@@ -118,7 +128,7 @@ const ChatView = () => {
 
         setChats(prev => ({
             ...prev,
-            [currentId]: { ...prev[currentId], messages: [...newMessages, { role: "assistant", content: "..." }] }
+            [currentId]: { ...prev[currentId], messages: [...newMessages, { role: "assistant", content: "" }] }
         }));
 
         while (true) {
