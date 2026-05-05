@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>مساعد الذكاء الاصطناعي | Gemini</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ["Tajawal", "sans-serif"],
+          },
+          colors: {
+            brand: "hsl(var(--brand))",
+            bg: {
+              default: "hsl(var(--bg-default))",
+              subtle: "hsl(var(--bg-subtle))",
+              inset: "hsl(var(--bg-inset))",
+            },
+            text: {
+              default: "hsl(var(--text-default))",
+              muted: "hsl(var(--text-muted))",
+              inverse: "hsl(var(--text-inverse))",
+            },
+            border: "hsl(var(--border))",
+          }
+        }
+      }
+    }
+  </script>
+  <script type="importmap">
+  {"imports":{
+    "react":"https://esm.sh/react@18.3.1",
+    "react-dom":"https://esm.sh/react-dom@18.3.1",
+    "react-dom/client":"https://esm.sh/react-dom@18.3.1/client",
+    "react/jsx-runtime":"https://esm.sh/react@18.3.1/jsx-runtime",
+    "react-router-dom":"https://esm.sh/react-router-dom@6.26.2?deps=react@18.3.1,react-dom@18.3.1",
+    "framer-motion":"https://esm.sh/framer-motion@11.11.10?deps=react@18.3.1,react-dom@18.3.1",
+    "lucide-react":"https://esm.sh/lucide-react@0.453.0?deps=react@18.3.1"
+  }}
+  </script>
+  <script>window.__AI_ENDPOINT__="https://wxphtsgezburjqoqiqqo.supabase.co/functions/v1/ai-public-proxy";</script>
+
+</head>
+<body class="bg-bg-default text-text-default">
+  <div id="root"></div>
+  <script type="module">
+    import { transform } from "https://esm.sh/sucrase@3.35.0?bundle";
+    const src = await fetch("./app.jsx").then(r => r.text());
+    const out = transform(src, { transforms: ["jsx","typescript"], jsxRuntime: "automatic", production: true }).code;
+    const blob = URL.createObjectURL(new Blob([out], { type: "text/javascript" }));
+    await import(blob);
+  </script>
+</body>
+</html>
